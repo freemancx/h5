@@ -135,7 +135,7 @@
 					</div>
 					<div class="ans">
 						<span id="name">
-							哈哈哈
+							客户
 						</span>
 						<img src="http://7xketu.com1.z0.glb.clouddn.com/ans2.png"/>
 					</div>
@@ -148,7 +148,35 @@
 		
 		<script src="http://mat1.gtimg.com/hn/chenxiang/h5/js/jquery-2.1.4.min.js"></script>
 		<script type="text/javascript">
-
+			//将url中的参数转换成json格式
+			function urlToJson(){	//默认参数为当前链接
+				var url = arguments[0] || window.location.href;
+				if( url.indexOf('?')<0 ){
+					return false;		//不存在参数返回false
+				}else{
+					var paraString = url.substring(url.indexOf('?') + 1,url.length);
+					var paraJsonString;
+					paraJsonString = paraString.replace(/\=/g,"\"\:\"");
+					paraJsonString = paraJsonString.replace(/\&/g,"\",\"");
+					paraJsonString = paraJsonString.replace(/\+/g," ");
+					paraJsonString = paraJsonString.replace(/\%26/g,"&");
+					paraJsonString = paraJsonString.replace(/\%2F/g,"\/");
+					paraJsonString = paraJsonString.replace(/\%0A/g,"\:");
+					paraJsonString = '{"' + paraJsonString + '"}';
+				    return JSON.parse(paraJsonString);
+				}
+			}
+			window.shareData = {    // 微信分享词
+			    "imgUrl" : "http://7xketu.com1.z0.glb.clouddn.com/weixin.jpg",
+			    "tLink": window.location.href,
+			    "tTitle" : "玩强。",
+			    "tContent" : "2017宝贝美学秋冬新品发布暨订货会邀您共鉴"
+			};
+			var urlData = urlToJson();
+			if(urlData.name){
+				$("#name").text(urlData.name);
+				shareData.tTitle = '尊敬的'+urlData.name+'：';
+			}
 			if (typeof WeixinJSBridge == "undefined") {
 		        var i = 0;
 		        if (document.addEventListener) {
@@ -184,13 +212,6 @@
 				});
 				setTimeout(fristOpen,5000);
 			});
-			
-		window.shareData = {    // 微信分享词
-		    "imgUrl" : "http://7xketu.com1.z0.glb.clouddn.com/weixin.jpg",
-		    "tLink": window.location.href,
-		    "tTitle" : "玩强。",
-		    "tContent" : "2017宝贝美学秋冬新品发布暨订货会"
-		};
 		</script>
 <script type="text/javascript" src="http://mat1.gtimg.com/hn/chenxiang/js/shareAndPgv.js"></script>
 

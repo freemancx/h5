@@ -77,7 +77,7 @@
 			.ans span{
 			    position: absolute;
 			    font-weight: bold;
-			    top: 18px;
+			    top: 15px;
 			    left: 90px;
 			}
 			.ans img{
@@ -174,7 +174,7 @@
 			};
 			var urlData = urlToJson();
 			if(urlData.name){
-				urlData.name = eval("'" + urlData.name + "'");
+				urlData.name = decodeURI( urlData.name );
 				$("#name").text(urlData.name);
 				shareData.tTitle = '尊敬的'+urlData.name+'：';
 			}
@@ -211,7 +211,7 @@
 						fristOpen()
 					}
 				});
-				setTimeout(fristOpen,5000);
+				setTimeout(fristOpen,4000);
 			});
 		</script>
 <script type="text/javascript" src="http://mat1.gtimg.com/hn/chenxiang/js/shareAndPgv.js"></script>

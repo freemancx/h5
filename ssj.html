@@ -1,0 +1,406 @@
+
+<!DOCTYPE html>
+
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+		<script src="http://mat1.gtimg.com/hn/cx/js/w640.js" type="text/javascript" charset="utf-8"></script>
+
+		<script src="http://mat1.gtimg.com/hn/cx/js/jquery-1.11.3.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="http://mat1.gtimg.com/hn/cx/css/animate_cx_v3.2.css" />
+		<link rel="stylesheet" type="text/css" href="http://mat1.gtimg.com/hn/cx/css/h5baseV4.4.css"/>
+		<title>常德水世界欢乐开园</title>
+		
+		<!--<link rel="stylesheet" type="text/css" href="css/style.css"/>-->
+		<style type="text/css">
+		.model {
+	width: 100%;
+	height: 100%;
+	-webkit-transition: all 1.5s;
+	transition: all 1.5s;
+}
+
+html,
+body {
+	position: relative;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+}
+
+#main {
+	position: relative;
+	width: 640px;
+	height: 1040px;
+	overflow: hidden;
+}
+
+.page {
+	position: absolute;
+	width: 640px;
+	height: 1040px;
+	top: 0;
+	left: 0;
+	z-index: 20;
+	display: none;
+	-webkit-transition: 1.5s ease-out;
+	transition: 1.5s ease-out;
+}
+
+.page>img,
+.page>div {
+	position: absolute;
+}
+
+.trsiOpac1s {
+	transition: opacity 1s;
+	-webkit-transition: opacity 1s;
+}
+
+.page .item {
+	opacity: 0;
+}
+
+@-webkit-keyframes rotateN {
+	from {
+		-webkit-transform: rotate(0deg);
+	}
+	to {
+		-webkit-transform: rotate(360deg);
+	}
+}
+
+@keyframes rotateN {
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+.rotateN {
+	-webkit-animation-name: rotateN;
+	-webkit-animation-duration: 4s;
+	-webkit-animation-iteration-count: infinite;
+	-webkit-animation-timing-function: linear;
+	animation-name: rotateN;
+	animation-duration: 4s;
+	animation-iteration-count: infinite;
+	animation-timing-function: linear;
+}
+
+.pause {
+	animation-play-state: paused;
+	-webkit-animation-play-state: paused;
+}
+
+#music-icon {
+    
+    z-index: 52;
+    top: 22px;
+    right: 36px;
+}
+
+.cloud {
+	opacity: .4;
+	transform: translate3d(-600px, 0, 0);
+	-webkit-transform: translate3d(-600px, 0, 0);
+	animation: cloudMove 60s linear infinite;
+	-webkit-animation: cloudMove 60s linear infinite;
+}
+.cloud2 {
+	opacity: .6;
+	transform: translate3d(-600px, 0, 0);
+	-webkit-transform: translate3d(-600px, 0, 0);
+	animation: cloudMove 40s linear infinite;
+	-webkit-animation: cloudMove 40s linear infinite;
+}
+
+#page2 .cloud {
+	width: 1155px;
+	height: 2823px;
+}
+
+@keyframes cloudMove {
+	0%,
+	100% {
+		transform: translate3d(-600px, 0, 0);
+	}
+	50% {
+		transform: translate3d(600px, 0, 0);
+	}
+}
+
+@-webkit-keyframes cloudMove {
+	0%,
+	100% {
+		-webkit-transform: translate3d(-600px, 0, 0);
+	}
+	50% {
+		-webkit-transform: translate3d(600px, 0, 0);
+	}
+}
+.logo{
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 21;
+}
+.p1{
+	display: none;
+}
+
+.dangyun{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 21;
+	pointer-events: none;
+}
+.dangyun img{
+    position: absolute;
+    width: 1040px;
+    transition: all 1s linear;
+    -webkit-transition: all 1s linear;
+    left: 0;
+    top: -100px;
+    max-width: 1040px;
+    
+    transform: translateX(-1040px);
+    -webkit-transform: translateX(-1040px);
+}
+#myun2{
+	transform: rotate(180deg) translateX(-1040px);
+	-webkit-transform: rotate(180deg) translateX(-1040px);
+    top: 100px;
+    left: -400px;
+}
+.dangyun.close img{
+	transform: translateX(0px);
+    -webkit-transform: translateX(0px);
+}
+.dangyun.close #myun2{
+	transform: rotate(180deg) ;
+    -webkit-transform: rotate(180deg) ;
+}
+#page2,
+.mbg{
+	transition: 4s linear;
+	-webkit-transition: 4s linear;
+	
+	transform-origin: top center;
+	-webkit-transform-origin: top center;
+    background-size: 100%;
+}
+#page2{
+	width: 400%;
+	height: 400%;
+	transform: scale(.25);
+	-webkit-transform: scale(.25);
+	transform-origin: 33.3% 0%;
+	-webkit-transform-origin: 33.3% 0%;
+	left: -100%;
+}
+.mbg1{
+	width: 50%;
+	height: 50%;
+	left: 25%;
+	top: 0;
+	transform-origin: left top;
+	-webkit-transform-origin: left top;
+}
+.mbg2{
+	width: 50%;
+	height: 50%;
+	left: 0;
+	top: 0;
+	transform-origin: bottom center;
+	-webkit-transform-origin: bottom center;
+	transition: all 2s ease-out;
+	-webkit-transition: all 2s ease-out;
+}
+.jump-div{
+	position: absolute;
+    top: 425px;
+    right: 100px;
+    transition: all 1s ease-in;
+    -webkit-transition: all 1s ease-in; 
+}
+#jump-man{
+	transition: all 1s ease-out;
+    -webkit-transition: all 1s ease-out; 
+}
+.shuidi{
+	    bottom: 100px;
+    left: 180px;
+    width: 300px;
+}
+#page3.animated{
+	transform: scale(1.5);
+	-webkit-transform: scale(1.5);
+	transform-origin: bottom center;
+	-webkit-transform-origin: bottom center;
+	transition-delay: 0s;
+    -webkit-transition-delay: 0s;
+}
+.animated>.jump-div{
+    transform: translate(-150px,400px);
+    -webkit-transform: translate(-150px,400px);  
+}
+.animated>.jump-div #jump-man{
+	transform: rotate(-350deg);
+	-webkit-transform: rotate(-350deg);
+}
+#btn-jump{
+	    top: 800px;
+    left: 223px;
+}
+		</style>
+	</head>
+	
+
+	<body>
+		
+		<div id="main">
+			<div class="model animated">
+				<div class="page" id="page1" style="background-image: url(http://mat1.gtimg.com/hn/cx/2017/0605ssj/bg0.jpg); display: block;">
+					<img src="http://mat1.gtimg.com/hn/cx/2017/0605ssj/bc1.png" class="cloud" style="left: 200px; top: 60px;"/>
+					<img src="http://mat1.gtimg.com/hn/cx/2017/0605ssj/bc2.png" class="cloud2" style="left: 400px; top: 230px;"/>
+					<img src="http://mat1.gtimg.com/hn/cx/2017/0605ssj/bag1_door.png" class="" style="top: 177px;"/>
+					
+					
+					<img src="http://mat1.gtimg.com/hn/cx/2017/0605ssj/bag1_men1.png" class="p1 bounceBtn" style="top: 720px;left: 120px;"/>
+					<img src="http://mat1.gtimg.com/hn/cx/2017/0605ssj/bag1_men2.png" class="rightSpeedIn item item02" style="top: 700px;right: 250px;"/>
+					<img src="http://mat1.gtimg.com/hn/cx/2017/0605ssj/bag1_men3.png" class="leftIn item item04" style="bottom: 0; right: 50px;"/>
+					
+					<img src="http://mat1.gtimg.com/hn/cx/2017/0605ssj/bag1_comeon.png" class="item item06 flashBtn p1" id="go-page2" style="top: 550px;left: 252px;"/>
+				</div>
+				<div class="page fadeIn item02" id="page2" style="background-image: url(http://mat1.gtimg.com/hn/cx/2017/0605ssj/bg1.jpg);">
+					<div class="mbg mbg1" style="background-image: url(http://mat1.gtimg.com/hn/cx/2017/0605ssj/bg2.jpg);">
+						<div class="mbg mbg2" style="background-image: url(http://mat1.gtimg.com/hn/cx/2017/0605ssj/bg3.jpg);">
+							
+						</div>
+					</div>
+					
+				</div>
+				
+				<img src="http://mat1.gtimg.com/hn/cx/2017/0605ssj/logo.png" class="logo"/>
+				<div class="dangyun">
+					<img src="http://mat1.gtimg.com/hn/cx/2017/0605ssj/bag2_yun1.png" id="myun1"/>
+					<img src="http://mat1.gtimg.com/hn/cx/2017/0605ssj/bag2_yun1.png" id="myun2"/>
+				</div>
+				
+				
+				<div class="page item item04 fadeIn" id="page3" style="background-image: url(http://mat1.gtimg.com/hn/cx/2017/0605ssj/bg4.jpg);">
+					<div class="jump-div">
+						<img src="http://mat1.gtimg.com/hn/cx/2017/0605ssj/jumpman.png" id="jump-man"/>
+					</div>
+					<img src="http://mat1.gtimg.com/hn/cx/2017/0605ssj/shuidi.png" class="item item02 smallIn shuidi"/>
+					<img src="http://mat1.gtimg.com/hn/cx/2017/0605ssj/bag3_btn.png" id="btn-jump"/>
+				</div>
+				
+				<div class="page item item04 fadeIn" id="page4" style="z-index: 30; background-image: url(http://mat1.gtimg.com/hn/cx/2017/0605ssj/bg5.jpg);">
+					<img src="http://mat1.gtimg.com/hn/cx/2017/0605ssj/last_txt.png" class="item item02 smallBounce" style="top: 200px;left: 70px;"/>
+					<img src="http://mat1.gtimg.com/hn/cx/2017/0605ssj/bag4_btn.png" class="item03 tadaBtn" style="top: 760px;left: 240px;"/>
+					<img src="http://mat1.gtimg.com/hn/cx/2017/0605ssj/logo.png" style="top: 880px;"/>
+				</div>
+			</div>
+			
+			<!-- 音乐 -->
+			<audio id="page-music" src="http://mat1.gtimg.com/hn/cx/2017/04hezhang/bgm.mp3" autoplay="autoplay" preload loop="loop" style="display: none;"></audio>
+			<div id="music-icon" class="rotateN"></div>
+			
+		</div>
+		
+		
+		<script>
+
+			$(document).ready(function() {
+				
+				$(window).load(function() {
+					$("#page1").addClass('animated');
+					$(".p1").show();
+					$("#go-page2").one('touchend',function(){
+						$(".dangyun").addClass('close');
+						$("#go-page2").hide();
+						
+						$("#page1").css('transform','scale(2)');
+						
+						$("#page2").show();
+						
+						setTimeout(function(){
+							$(".dangyun").removeClass('close');
+						},1500);
+						setTimeout(function(){
+							$("#page1").remove();
+							$("#page2").css('transform','scale(.5)');
+							
+							setTimeout(function(){
+//								$(".mbg1").css('transform','scale(2)');
+								$("#page2").css('transform','scale(.75)');
+//								$("#page2").css('transform-origin','75% 0%');
+							},4000);
+							setTimeout(function(){
+//								$(".mbg2").css('transform','scale(2)');
+
+								$("#page2").css('transform','scale(1)');
+//								$("#page2").css('transform-origin','75% 0%');
+							},8000);
+							setTimeout(function(){
+								$(".mbg2").css('transform','scale(1.5)');
+								$("#page3").show();
+							},12000);
+						},2500);
+					});
+					
+					$("#btn-jump").one('touchend',function(){
+						$(this).hide();
+						$("#page3").addClass('animated');
+						$("#page4").show();
+						setTimeout(function(){
+							
+								$("#page4").addClass('animated');
+						},1500);
+					});
+					
+				});
+				
+				
+				
+				$('body').one('touchstart', function() {
+					$("#page-music")[0].play();
+				});
+				
+				if (typeof WeixinJSBridge == "undefined") {
+		             if (document.addEventListener) {
+		                 document.addEventListener("WeixinJSBridgeReady", function func() {
+		                     $("#page-music")[0].play();
+		                }, false);
+		            }
+		        }
+
+
+				//音频+分享js 3/3
+				$("#music-icon").click(function() {
+					if($(this).hasClass('pause')) { 
+						$(this).removeClass('pause');
+						$("#page-music")[0].play(); 
+					} else { 
+						$(this).addClass('pause');
+						$("#page-music")[0].pause(); 
+					}
+				});
+			});
+		</script>
+		<script type="text/javascript" src="http://mat1.gtimg.com/hn/chenxiang/js/shareAndPgv.js" /></script>
+
+	</body>
+
+</html>
+<!--[if !IE]>|xGv00|b5fbc4dc703ec415229e0e0cf817d78b<![endif]-->

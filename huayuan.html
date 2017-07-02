@@ -1,0 +1,1190 @@
+
+
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<title>雅皮12宫的奇幻冒险</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+
+		<script src="http://mat1.gtimg.com/hn/cx/js/w640.js" type="text/javascript" charset="utf-8"></script>
+		<script src="http://mat1.gtimg.com/hn/cx/js/wxinfo.js" type="text/javascript" charset="utf-8"></script>
+		<script src="http://mat1.gtimg.com/hn/cx/js/jquery-1.11.3.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="http://mat1.gtimg.com/hn/cx/css/h5baseV4.4.css"/>
+		<link rel="stylesheet" href="http://hn.qq.com/chenxiang/h5/css/animate_cx_v2.css" />
+		<style type="text/css">
+			html,body,#main{
+				width: 100%;
+				height: 100%;
+				position: relative;
+				overflow: hidden;
+			}
+			#main{
+				background: url(http://7xk4uo.com1.z0.glb.clouddn.com/hy72bg2.jpg) no-repeat;
+			}
+			.page {
+				position: absolute;
+				width: 100%;
+				height: 100%;
+				z-index: 10;
+				opacity: 0;
+				-webkit-transition: opacity 1s;
+				transition: opacity 1s;
+				overflow: hidden;
+			}
+			
+			.page.animated {
+				opacity: 1;
+			}
+			
+			.page-01 {
+				background: url(http://7xk4uo.com1.z0.glb.clouddn.com/hy72bg1.jpg) no-repeat;
+				z-index: 11;
+				opacity: 1;
+			}
+			
+			#switch {
+				position: absolute;
+			    right: 228px;
+    			top: 750px;	
+				display: none;
+			}
+			
+			.page-02 {
+				background: url(http://7xk4uo.com1.z0.glb.clouddn.com/hy72bg2.jpg) no-repeat;
+			}
+			.word {
+				position: absolute;
+				top: 100px;
+			}
+			.word p {
+				margin-bottom: 10px;
+			}
+			
+			.tc {
+				position: absolute;
+				left: 0;
+				top: 0;
+				width: 100%;
+				height: 100%;
+				display: none;
+			}
+			
+			.bg_3_long {
+				position: absolute;
+				right: 0;
+				top: 0;
+				z-index: -1;
+				width: 5808px;
+				height: 1040px;
+				background-image: url(http://7xk4uo.com1.z0.glb.clouddn.com/hy72bg_l1.jpg);
+				background-size: 100% 100%;
+				background-repeat: no-repeat;
+			}
+			
+			@keyframes bgMove {
+				0% {
+					transform: translateX(5000px);
+				}
+				100% {
+					transform: translateX(0);
+				}
+			}
+			
+			@-webkit-keyframes bgMove {
+				0% {
+					-webkit-transform: translateX(5000px);
+				}
+				100% {
+					-webkit-transform: translateX(0);
+				}
+			}
+			
+			.animated .bgMove {
+				animation-name: bgMove;
+				animation-timing-function: linear;
+				animation-fill-mode: both;
+				animation-iteration-count: 1;
+				animation-duration: 34s;
+				-webkit-animation-name: bgMove;
+				-webkit-animation-timing-function: linear;
+				-webkit-animation-fill-mode: both;
+				-webkit-animation-duration: 34s;
+				-webkit-animation-iteration-count: 1;
+			}
+			
+			.my_score {
+			    position: absolute;
+			    width: 118px;
+			    height: 40px;
+			    left: 0px;
+			    top: 100px;
+			    text-align: center;
+			    line-height: 40px;
+			    font-size: 40px;
+			    color: #b28850;
+			    padding: 146px 250px 0px 245px;
+			    box-sizing: content-box;
+			    background-image: url(http://7xk4uo.com1.z0.glb.clouddn.com/hy72ans_1.png);
+			    background-repeat: no-repeat;
+			}
+			#btn_rank,
+			#share-game{
+				top: 740px;
+			    right: 100px;
+			    left: auto;
+			}
+			#btn_again,
+			#blank-game{
+			    top: 740px;
+    			left: 100px;
+			}
+			
+			@keyframes flicker {
+				0% {
+					opacity: 1;
+				}
+				50% {
+					opacity: 1;
+				}
+				100% {
+					opacity: 0;
+				}
+			}
+			
+			
+			/*排行榜*/
+			
+			.mask-rank,
+			.share-pop {
+				position: fixed;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				z-index: 20;
+				display: none;
+				max-width: 640px;
+				min-height: 1040px;
+			}
+			
+			.mask-rank .rank {
+			    width: 640px;
+			    height: 670px;
+			    background-image: url(http://7xk4uo.com1.z0.glb.clouddn.com/hy72rank_res.png);
+			    position: absolute;
+			    top: 55px;
+			    left: 0;
+			    z-index: 999;
+			    background-repeat: no-repeat;
+			}
+			
+			.mask-rank .content {
+				width: 400px;
+			    height: 455px;
+			    margin: 215px auto 0;
+			    color: #fff;
+			    font-size: 30px;
+			    overflow-y: scroll;
+			}
+			
+			ul,
+			li {
+				margin: 0;
+				padding: 0;
+				list-style: none;
+			}
+			
+			li {
+				overflow: hidden;
+				height: 50px;
+				line-height: 50px;
+			}
+			
+			li ul li {
+				width: 100%;
+				float: left;
+				font-size: 20px;
+			    text-align: center;
+			}
+			
+			li ul li:nth-child(1) {
+				width: 90px;
+				padding-left: 20px;
+			}
+			
+			li ul li:nth-child(2) {
+			    width: 205px;
+			}
+			
+			li ul li:nth-child(3) {
+				width: 90px;
+				text-align: right;
+			}
+			
+			li i {
+				font-style: normal;
+			}
+			
+			-webkit-keyframes rotateN {
+				from {
+					-webkit-transform: rotate(0deg);
+				}
+				to {
+					-webkit-transform: rotate(360deg);
+				}
+			}
+			
+			@keyframes rotateN {
+				from {
+					transform: rotate(0deg);
+				}
+				to {
+					transform: rotate(360deg);
+				}
+			}
+			
+			.rotateN {
+				-webkit-animation-name: rotateN;
+				-webkit-animation-duration: 4s;
+				-webkit-animation-iteration-count: infinite;
+				-webkit-animation-timing-function: linear;
+				animation-name: rotateN;
+				animation-duration: 4s;
+				animation-iteration-count: infinite;
+				animation-timing-function: linear;
+			}
+			
+			-webkit-keyframes rotateS {
+				from {
+					-webkit-transform: rotate(360deg);
+				}
+				to {
+					-webkit-transform: rotate(0deg);
+				}
+			}
+			
+			@keyframes rotateS {
+				from {
+					transform: rotate(360deg);
+				}
+				to {
+					transform: rotate(0deg);
+				}
+			}
+			
+			.rotateS {
+				-webkit-animation-name: rotateS;
+				-webkit-animation-duration: 5s;
+				-webkit-animation-iteration-count: infinite;
+				-webkit-animation-timing-function: linear;
+				animation-name: rotateS;
+				animation-duration: 5s;
+				animation-iteration-count: infinite;
+				animation-timing-function: linear;
+			}
+			
+			.pause {
+				animation-play-state: paused;
+				-webkit-animation-play-state: paused;
+			}
+			
+			.item03 {
+			    animation-delay: 1.5s;
+			    -webkit-animation-delay: 1.5s;
+			}
+            .blank_up{
+				position:relative;
+				top: -245px;
+				left: 230px;
+			}
+			.mask img{
+				position: absolute;
+				top: 0;
+				left: 0;
+			}
+			.xzBtn{
+			    position: absolute;
+			    top: 760px;
+			    width: 212px;
+			    height: 212px;
+			    left: 214px;
+			}
+			.xzBtn img{
+				width: 100%;
+			}
+			#btn_next{
+				top: 600px;
+			}
+			.mask .last-logo{
+			    top: 850px;
+			}
+			#mask-share img{
+				left: auto;
+			}
+		</style>
+	</head>
+
+	<body>
+		<!-- 音乐 -->
+		<div id="music-icon" class="rotateN"></div>
+    	<audio id="page-music1" src="http://mat1.gtimg.com/hn/chenxiang/liqianwen/game_diandian/img/bgm01.mp3" autoplay="autoplay" preload loop="loop" style="display: none;"></audio>
+    	<audio id="page-music2" src="http://mat1.gtimg.com/hn/chenxiang/liqianwen/game_diandian/img/bgm02.mp3" preload loop="loop" style="display: none;"></audio>
+    	<audio id="page-music3" src="http://mat1.gtimg.com/hn/chenxiang/liqianwen/game_diandian/img/bgm.mp3" preload loop="loop" style="display: none;"></audio>
+		<audio id="get-music" src="http://mat1.gtimg.com/hn/chenxiang/liqianwen/game_diandian/img/get.mp3" style="display: none;"></audio>
+		<audio id="erro-music" src="http://mat1.gtimg.com/hn/chenxiang/liqianwen/game_diandian/img/erro.mp3" style="display: none;"></audio>
+			
+		<!-- 音乐 -->
+		<div id="main">
+			<div class="page page-01 animated">
+				<img id="switch" src="http://7xk4uo.com1.z0.glb.clouddn.com/hy72btn_s.png" class="fadeIn"/>
+			</div>
+			<div class="page page-02">
+				<div class="word">
+					<p><img class="bottomIn item00" src="http://7xk4uo.com1.z0.glb.clouddn.com/hy72t1.png" /></p>
+					<p><img class="bottomIn item02" src="http://7xk4uo.com1.z0.glb.clouddn.com/hy72t2.png" /></p>
+					<p><img class="bottomIn item04" src="http://7xk4uo.com1.z0.glb.clouddn.com/hy72t3.png" /></p>
+					<p><img class="bottomIn item06" src="http://7xk4uo.com1.z0.glb.clouddn.com/hy72t4.png" /></p>
+					<p><img class="bottomIn item08" src="http://7xk4uo.com1.z0.glb.clouddn.com/hy72t5.png" /></p>
+					<p><img class="fadeIn item10" src="http://7xk4uo.com1.z0.glb.clouddn.com/hy72map.jpg"/></p>
+				</div>
+				<div class="mask" id="mask-rule">
+					<img src="http://7xk4uo.com1.z0.glb.clouddn.com/hy72bg_xk.png" class="xiankuang"/>
+					<img src="http://7xk4uo.com1.z0.glb.clouddn.com/hy72rule.png"/>
+					<div class="xzBtn" id="btn_enter">
+						<img src="http://7xk4uo.com1.z0.glb.clouddn.com/hy72btn_ik.png" class="rotateN"/>
+						<img src="http://7xk4uo.com1.z0.glb.clouddn.com/hy72btn_ig.png" class="rotateS"/>
+						<img src="http://7xk4uo.com1.z0.glb.clouddn.com/hy72btn_i.png"/>
+					</div>
+				</div>
+			</div>
+			<div class="page page-03">
+				<canvas id="canvas"></canvas>
+				
+				<div class="tc mask" id="mask-next">
+					<img src="http://7xk4uo.com1.z0.glb.clouddn.com/hy72bg_xk.png"/>
+					<img src="http://7xk4uo.com1.z0.glb.clouddn.com/hy72tips_next.png"/>
+					<div class="xzBtn" id="btn_next">
+						<img src="http://7xk4uo.com1.z0.glb.clouddn.com/hy72btn_ik.png" class="rotateN"/>
+						<img src="http://7xk4uo.com1.z0.glb.clouddn.com/hy72btn_ig.png" class="rotateS"/>
+						<img src="http://7xk4uo.com1.z0.glb.clouddn.com/hy72btn_in.png"/>
+					</div>
+				</div>
+				<div class="tc mask" id="mask-end">
+					<img src="http://7xk4uo.com1.z0.glb.clouddn.com/hy72bg_xk.png"/>
+					<div class="my_score">
+						123321
+					</div>
+					<img src="http://7xk4uo.com1.z0.glb.clouddn.com/hy72logo_end.png" class="last-logo"/>
+					<img src="http://7xk4uo.com1.z0.glb.clouddn.com/hy72ans_2.png" style="top: 300px;"/>
+					<img src="http://7xk4uo.com1.z0.glb.clouddn.com/hy72btn_res.png" id="btn_again"/>
+					<img src="http://7xk4uo.com1.z0.glb.clouddn.com/hy72btn_rank.png" id="btn_rank"/>
+				</div>
+				<div class="bg_3_long bgMove"></div>
+			</div>
+		</div>
+		<!--排行榜-->
+		<div class="mask mask-rank">
+			<img src="http://7xk4uo.com1.z0.glb.clouddn.com/hy72bg_xk.png">
+			<div class="rank">
+				<div class="content">
+					<ul id="rank-item"></ul>
+				</div>
+			</div>
+			<img src="http://7xk4uo.com1.z0.glb.clouddn.com/hy72btn_back.png" id="blank-game" />
+			<img src="http://7xk4uo.com1.z0.glb.clouddn.com/hy72btn_share.png" id="share-game" />
+			<img src="http://7xk4uo.com1.z0.glb.clouddn.com/hy72logo_end.png" class="last-logo"/>
+		</div>
+		<div class="mask" id="mask-share">
+			<img src="http://mat1.gtimg.com/hn/cx/img/shareArr.png" class="rightup-arr">
+			<img src="http://mat1.gtimg.com/hn/cx/img/shareTxt.png">
+		</div>
+		
+		<script src="https://cdn1.lncld.net/static/js/av-mini-0.6.4.js"></script>
+
+		<script>
+		
+		if (typeof WeixinJSBridge == "undefined") {
+	        var i = 0;
+	        if (document.addEventListener) {
+	            document.addEventListener("WeixinJSBridgeReady", function func() {
+            		$("#page-music1")[0].play();
+	            }, false);
+	        }
+	    }
+		var gameLevel = 1;
+		var allScore = 0;
+		var haveSound = true;
+		$("#music-icon").click(function(){
+			if( $(this).hasClass('pause') ){ 
+				$(this).removeClass('pause');
+				$("#page-music"+gameLevel)[0].play();
+				haveSound = true;
+			} else{ 
+				$(this).addClass('pause'); 
+				$("#page-music"+gameLevel)[0].pause();
+				haveSound = false;
+			}
+		});
+		
+			$(window).load(function() {
+				
+				$("#switch").show();
+				
+				$('body').one('touchstart',function(){
+					$("#page-music1")[0].play();
+					//音频+分享js 3/3
+					
+				});
+				
+				function preload(){
+					var loadedimages=0;
+					imgList = [
+						"http://7xk4uo.com1.z0.glb.clouddn.com/hy72drop11.png",
+						"http://7xk4uo.com1.z0.glb.clouddn.com/hy72drop12.png",
+						"http://7xk4uo.com1.z0.glb.clouddn.com/hy72drop13.png",
+						"http://7xk4uo.com1.z0.glb.clouddn.com/hy72drop14.png",
+						"http://7xk4uo.com1.z0.glb.clouddn.com/hy72drop15.png",
+						"http://7xk4uo.com1.z0.glb.clouddn.com/hy72drop16.png",
+						"http://7xk4uo.com1.z0.glb.clouddn.com/hy72drop17.png",
+						"http://7xk4uo.com1.z0.glb.clouddn.com/hy72tips_next.png",
+						"http://7xk4uo.com1.z0.glb.clouddn.com/hy72rule.png",
+						"http://7xk4uo.com1.z0.glb.clouddn.com/hy72bg_xk.png",
+						"http://7xk4uo.com1.z0.glb.clouddn.com/hy72ans_1.png",
+						"http://7xk4uo.com1.z0.glb.clouddn.com/hy72ans_2.png",
+						
+					];
+					preloadImages(imgList);
+					
+					function preloadImages(arr){
+					    var newimages=[];
+					    var arr=(typeof arr!="object")? [arr] : arr;
+					    function imageloadpost(){
+					        loadedimages++;			        			   
+					        if (loadedimages==arr.length){
+					        	console.log("图片已经加载完成");			        				     			        				       				        	
+					        }
+					    }
+					    for (var i=0; i<arr.length; i++){
+					        newimages[i]=new Image();
+					        newimages[i].src=arr[i];
+					        newimages[i].onload=function(){
+					            imageloadpost();
+					        }
+					        newimages[i].onerror=function(){
+					        	console.log( "第" + i + "张图片加载出现问题"  );
+					        	imageloadpost();
+					        }
+					    }
+					}
+				}
+				preload();	
+				
+				function swiper( id ) {
+					var qid = '#' + id;
+					var pageId = 0;	//0
+					var beforePage = 0;
+					var pageNum = $( qid +' .page').length - 1;//获取页数
+					return{
+						nextPage : function(){
+							beforePage = pageId;
+							pageId++;
+							$( qid+' .page' ).eq(beforePage).css('z-index','10').removeClass('animated');						
+							$( qid+' .page' ).eq(pageId).css('z-index','11').addClass('animated');
+							
+						},
+						prevPage : function(){
+							beforePage = pageId;
+							pageId--;
+							$( qid+' .page' ).eq(beforePage).css('z-index','10').removeClass('animated');						
+							$( qid+' .page' ).eq(pageId).css('z-index','11').addClass('animated');
+							
+						}
+					}
+				}
+				
+				
+				var mySwiper = new swiper("main");
+				var myGame = null;
+				
+				$("#switch").click(function(){
+					mySwiper.nextPage();
+					setTimeout(function(){
+						$("#mask-rule").show();
+					},7000);
+				});
+				$("#btn_enter").click(function(){
+					console.log('game_part');
+					mySwiper.nextPage();
+					myGame = new playGame();
+					
+					var lv2bg = new Image();
+					lv2bg.src = "http://7xk4uo.com1.z0.glb.clouddn.com/hy72bg_l2.jpg";
+					lv2bg.onload = function(){
+						console.log('bg2.load');
+					}
+					var lv3bg = new Image();
+					lv3bg.src =	"http://7xk4uo.com1.z0.glb.clouddn.com/hy72bg_l3.jpg";
+					lv3bg.onload = function(){
+						console.log('bg3.load');
+					}
+				});
+				$("#btn_again").click(function(){
+					$(".tc").hide();
+					myGame.playAgain();
+					gameLevel = 1;
+					allScore = 0;
+					$("#page-music3")[0].pause();
+					$("#page-music1")[0].play();
+					$(".bg_3_long").css('background-image','url(http://7xk4uo.com1.z0.glb.clouddn.com/hy72bg_l1.jpg)').addClass("bgMove");
+				});
+				$("#btn_next").click(function(){
+					console.log( gameLevel );
+					if( gameLevel == 1 ){
+//						if(myGame.getMonstersCaught() >= 1000) {
+							myGame.nextLevel();
+							$(".tc").hide();
+							$(".bg_3_long").addClass("bgMove");
+//						}
+//						else {
+//							alert("您收集的能量不足1000，无法进入下一关~ 再玩一次吧，加油！");
+//						}
+					}else if( gameLevel == 2 ){
+//						if(myGame.getMonstersCaught() >= 3000) {
+							myGame.nextLevel();
+							$(".tc").hide();
+							$(".bg_3_long").addClass("bgMove");
+//						}
+//						else {
+//							alert("您收集的金币数量不足3000，无法进入下一关~ 再玩一次吧，加油！");
+//						}
+					}else{
+//						if(myGame.getMonstersCaught() >= 4000) {
+//							window.location.href = "http://data.demo.daxiangw.com/reception/investigation/index/id/12";
+//						}
+//						else {
+//							alert("您收集的金币数量不足4000，还领不了红包哦~再玩一次吧，加油！");
+//						}
+					}
+					
+				});
+				
+				var wAlert = window.alert;  
+				window.alert = function (message) {  
+				    try {  
+				        var iframe = document.createElement("IFRAME");  
+				        iframe.style.display = "none";  
+				        iframe.setAttribute("src", 'data:text/plain,');  
+				        document.documentElement.appendChild(iframe);  
+				        var alertFrame = window.frames[0];  
+				        var iwindow = alertFrame.window;  
+				        if (iwindow == undefined) {  
+				            iwindow = alertFrame.contentWindow;  
+				        }  
+				        iwindow.alert(message);  
+				        iframe.parentNode.removeChild(iframe);  
+				    }  
+				    catch (exc) {  
+				        return wAlert(message);  
+				    }  
+				}
+				
+				
+				
+				function playGame() {
+					var stop = null;
+					var heroY = null;
+					var gameTime = 30;
+					var monstersCaught = 0;						
+					var canvas = document.getElementById("canvas");
+					var ctx = canvas.getContext("2d");
+					
+					//Score image
+					var add50Image = new Image();
+					var add100Image = new Image();
+					var add200Image = new Image();
+					var sub150Image = new Image();
+					add50Image.src = "http://mat1.gtimg.com/hn/chenxiang/liqianwen/game_diandian/img/add50.png";
+					add100Image.src = "http://mat1.gtimg.com/hn/chenxiang/liqianwen/game_diandian/img/add100.png";
+					add200Image.src = "http://mat1.gtimg.com/hn/chenxiang/liqianwen/game_diandian/img/add200.png";
+					sub150Image.src = "http://mat1.gtimg.com/hn/chenxiang/liqianwen/game_diandian/img/sub150.png";
+					var add50 = {
+						speed: 256, // movement in pixels per second
+						x: -100,
+						y: -100
+					};
+					var add100 = {
+						speed: 256, // movement in pixels per second
+						x: -100,
+						y: -100
+					};
+					var add200 = {
+						speed: 256, // movement in pixels per second
+						x: -100,
+						y: -100
+					};
+					var sub150 = {
+						speed: 256, // movement in pixels per second
+						x: -100,
+						y: -100
+					};
+					
+					// Hero image		
+					var curHeroImage = new Image();
+					var loadedimages2=0;
+					var imgList2 = [
+						"http://7xk4uo.com1.z0.glb.clouddn.com/hy72person2.png",
+						"http://7xk4uo.com1.z0.glb.clouddn.com/hy72person2.png",
+						"http://7xk4uo.com1.z0.glb.clouddn.com/hy72person2.png",
+						"http://7xk4uo.com1.z0.glb.clouddn.com/hy72person2.png"
+					];
+					var heroReady = false;
+					function imageloadpost2(){
+				        loadedimages2++;			        			   
+				        if (loadedimages2==imgList2.length){
+				        	console.log("水滴加载完成");
+				        	heroReady = true;				        	
+				        }
+				    }
+					var heroImage=[];
+					for (var i=0; i<imgList2.length; i++){						
+						heroImage[i]=new Image();
+					    heroImage[i].src=imgList2[i];
+					    heroImage[i].onload=function(){
+					        imageloadpost2();
+					    }
+					}
+					
+					
+					// Monster image
+					var loadedimages=0;
+					var imgList = [
+						"http://7xk4uo.com1.z0.glb.clouddn.com/hy72drop11.png",
+						"http://7xk4uo.com1.z0.glb.clouddn.com/hy72drop11.png",
+						"http://7xk4uo.com1.z0.glb.clouddn.com/hy72drop14.png",
+						"http://7xk4uo.com1.z0.glb.clouddn.com/hy72drop15.png",
+						"http://7xk4uo.com1.z0.glb.clouddn.com/hy72drop16.png",
+						"http://7xk4uo.com1.z0.glb.clouddn.com/hy72drop12.png",
+						"http://7xk4uo.com1.z0.glb.clouddn.com/hy72drop13.png",
+						"http://7xk4uo.com1.z0.glb.clouddn.com/hy72drop17.png",
+						"http://7xk4uo.com1.z0.glb.clouddn.com/hy72drop17.png"
+					];
+					var monsterReady = false;
+					function imageloadpost(){
+				        loadedimages++;			        			   
+				        if (loadedimages==imgList.length){
+				        	console.log("怪兽加载完成");
+				        	monsterReady = true;
+				        	initMonsters();
+				        }
+				    }
+					var monsterImage=[];
+					for (var i=0; i<imgList.length; i++){
+						monsterImage[i]=new Image();
+					    monsterImage[i].src=imgList[i];
+					    monsterImage[i].onload=function(){
+					        imageloadpost();
+					    }
+					}
+					
+					var timeImage = new Image();
+					var scoreImage = new Image();
+					timeImage.src = "http://7xk4uo.com1.z0.glb.clouddn.com/hy72time.png";
+					scoreImage.src = "http://7xk4uo.com1.z0.glb.clouddn.com/hy72score.png";
+					
+					
+					var hero = {
+						speed: 256, // movement in pixels per second
+						x: 1000,
+						y: heroY
+					};														
+					
+					var monster = [];
+					
+					function initMonster() {
+						monster = [
+							{
+								speed: 256,
+								x: Math.random()*560,
+								y: -100,
+								score: 100
+							},
+							{
+								speed: 256,
+								x: Math.random()*560,
+								y: -200,
+								score: 100
+							},
+							{
+								speed: 256,
+								x: Math.random()*560,
+								y: 0,
+								score: -150
+							},
+							{
+								speed: 256,
+								x: Math.random()*560,
+								y: -700,
+								score: -150
+							},
+							{
+								speed: 256,
+								x: Math.random()*560,
+								y: -150,
+								score: -150
+							},
+							{
+								speed: 256,
+								x: Math.random()*560,
+								y: -50,
+								score: 50
+							},
+							{
+								speed: 256,
+								x: Math.random()*560,
+								y: -300,
+								score: 50
+							},
+							{
+								speed: 256,
+								x: Math.random()*560,
+								y: -310,
+								score: 200
+							},
+							{
+								speed: 256,
+								x: Math.random()*560,
+								y: -650,
+								score: 200
+							}
+						];
+					}
+					
+					initMonster();															
+					
+					var reset = function () {				
+						hero.x = 240;
+						hero.y = heroY;	
+					};
+					
+					var resetMonster = function (i) {
+						monster[i].x = Math.random()*560;
+						monster[i].y = 0;
+					}
+				
+					// Update game objects
+					var update = function (modifier) {						
+						// Are they touching?
+						for(var i = 0 ; i < monsterImage.length ; i++)
+						{
+							if (
+								hero.x <= (monster[i].x + 80)
+								&& monster[i].x <= (hero.x + 170)
+								&& hero.y <= (monster[i].y + 42)
+								&& monster[i].y <= (hero.y + 130)
+							) {	
+								if(haveSound == true) {
+									if(monster[i].score > 0) {	
+										$("#get-music")[0].play();
+									}
+									else {									
+										$("#erro-music")[0].play();
+									}
+								}								
+								drawScore(monster[i].x,monster[i].y,monster[i].score);
+								monstersCaught += monster[i].score;
+								//console.log(monstersCaught);
+								resetMonster(i);									
+							}
+						}
+					};
+						    
+				    var drawScore =  function(x,y,score) {
+				    	if(score == 50) {				    	
+				    		add50.x = x;
+				    		add50.y = y;
+				    		setTimeout(function(){
+				    			add50.x = -100;
+				    			add50.y = -100;
+				    		},1000);
+				    	}
+				    	if(score == 100) {
+				    		add100.x = x;
+				    		add100.y = y;
+				    		setTimeout(function(){
+				    			add100.x = -100;
+				    			add100.y = -100;
+				    		},1000);
+				    	}
+				    	if(score == 200) {
+				    		add200.x = x;
+				    		add200.y = y;
+				    		setTimeout(function(){
+				    			add200.x = -100;
+				    			add200.y = -100;
+				    		},1000);
+				    	}
+				    	if(score == -150) {				    		
+				    		sub150.x = x;
+				    		sub150.y = y;
+				    		setTimeout(function(){
+				    			sub150.x = -100;
+				    			sub150.y = -100;
+				    		},1000);
+				    	}
+				    	
+				    }
+		 
+					var render = function () {		
+						canvas.width = document.documentElement.clientWidth;
+						canvas.height = document.documentElement.clientHeight;
+						heroY = canvas.height - 240;
+						hero.y = heroY;
+						ctx.drawImage(timeImage, 32 , 32);
+						ctx.drawImage(scoreImage, 375 , 32);
+						ctx.drawImage(add50Image,add50.x,add50.y);
+						ctx.drawImage(add100Image,add100.x,add100.y);
+						ctx.drawImage(add200Image,add200.x,add200.y);
+						ctx.drawImage(sub150Image,sub150.x,sub150.y);
+						if (heroReady) {
+							ctx.drawImage(curHeroImage, hero.x, hero.y);							
+						}		
+			            if (monsterReady) {				
+							for(var i = 0 ; i < monsterImage.length ; i++ ){
+								ctx.drawImage(monsterImage[i], monster[i].x, monster[i].y);						
+							}
+						}
+						
+						ctx.fillStyle = "rgb(250, 250, 250)";
+						ctx.font = "24px Helvetica";
+						ctx.textAlign = "left";
+						ctx.textBaseline = "top";
+						ctx.fillText(monstersCaught, 470, 60);
+						ctx.fillText(gameTime, 166, 60);
+					};
+					
+					var initMonsters = function () {				
+				    	for(var i = 0 ; i < monsterImage.length ; i++ ){
+							ctx.drawImage(monsterImage[i], Math.random()*560,0);			
+						}
+				    }
+					
+					var drop = function(i) {
+						setInterval(function(){			
+								monster[i].y += 10;
+								if(monster[i].y > canvas.height + 100 ) {							
+									resetMonster(i);													
+								}							
+						},30);
+					};
+					
+					var running = function() {
+						var j = 0;
+						setInterval(function(){
+							curHeroImage = heroImage[j];
+							j = (j+1)%4;								
+						},250);
+					}
+					
+					var touchEvent = function () {
+						var lastX;
+						var lastY;
+						canvas.addEventListener("touchstart",function(event) {
+							event.preventDefault();
+							lastX = event.touches[0].clientX;
+		            		lastY = event.touches[0].clientY;
+						},false);
+						
+						canvas.addEventListener("touchmove",function(event) {
+							event.preventDefault();          
+			                var nowX = event.touches[0].clientX;
+			                var nowY = event.touches[0].clientY;           
+		                    heroMove(lastX,lastY, nowX,nowY);
+				            lastX = event.touches[0].clientX;
+				            lastY = event.touches[0].clientY;
+						},false);
+						
+						function heroMove(startX,startY,endX,endY) {
+							if(startX-endX>0) {
+								if(hero.x - (startX-endX) < 0) {
+									return;
+								}
+								hero.x -= startX-endX;	
+							}
+							else {
+								if(hero.x + (endX-startX) > 455) {
+									return;
+								}
+								hero.x += endX-startX;
+							}
+						}
+					};
+					
+					function gameOver() {
+						allScore += monstersCaught;
+						window.cancelAnimationFrame(stop);//可以取消该次动画。
+						$(".bg_3_long").removeClass("bgMove");
+						if( gameLevel < 3 ){
+							shareData.tContent = "我一共收获了"+allScore+"点魔法能量，快来挑战吧！";
+							$("#mask-next").show();
+						}else{
+							$(".my_score").text(allScore);
+							shareData.tContent = "我一共收获了"+allScore+"点魔法能量，快来挑战吧！";
+							$("#mask-end").show();
+							subRank(allScore);
+						}
+						
+					}				
+					
+					// The main game loop
+					var main = function () {
+						var now = Date.now();
+						var delta = now - then;
+					
+						update(delta / 1000);				
+					
+						then = now;
+						render();
+						// Request to do this again ASAP
+						stop = requestAnimationFrame(main);
+					};	
+					// Cross-browser support for requestAnimationFrame
+					var w = window;
+					requestAnimationFrame = w.requestAnimationFrame || w.webkitRequestAnimationFrame || w.msRequestAnimationFrame || w.mozRequestAnimationFrame;
+					
+					// Let's play this game!
+					var then = Date.now();
+					reset();
+					main();
+					running();
+					function countDown() {
+						var timer2 = setInterval(function(){						
+							if(gameTime == 0)
+							{
+								gameOver();
+								clearInterval(timer2);
+							}
+							gameTime --;
+						},1000);
+					}
+					countDown();
+					touchEvent();
+					for(var i = 0; i < monsterImage.length ; i++ ){			
+						drop(i);							
+					}
+					return {
+						playAgain : function(){
+							monstersCaught = 0;
+							gameTime = 30;
+							initMonster();
+							reset();
+							main();
+							countDown();
+						},
+						getMonstersCaught : function(){
+							return monstersCaught;
+						},
+						nextLevel : function(){
+							monstersCaught = 0;
+							gameTime = 30;
+							
+							if( gameLevel == 1 ){
+								if( ! $("#music-icon").hasClass('pause') ) {
+									$("#page-music1")[0].pause();
+									$("#page-music2")[0].play();
+								}
+								
+//								monsterImage[2].src="http://mat1.gtimg.com/hn/chenxiang/liqianwen/game_diandian/img/drop12.png";
+//								monsterImage[3].src="http://mat1.gtimg.com/hn/chenxiang/liqianwen/game_diandian/img/drop13.png";
+//								monsterImage[4].src="http://mat1.gtimg.com/hn/chenxiang/liqianwen/game_diandian/img/drop14.png";
+								$(".bg_3_long").css('background-image','url(http://7xk4uo.com1.z0.glb.clouddn.com/hy72bg_l2.jpg)');
+								
+								setTimeout(function(){
+									$("#tanceng").attr('src','http://mat1.gtimg.com/hn/chenxiang/liqianwen/game_diandian/img/tc22.jpg');
+								},1000);
+								
+							}else{
+								if( ! $("#music-icon").hasClass('pause') ) {
+									$("#page-music2")[0].pause();
+									$("#page-music3")[0].play();
+								}
+								
+//								monsterImage[2].src="http://mat1.gtimg.com/hn/chenxiang/liqianwen/game_diandian/img/drop22.png";
+//								monsterImage[3].src="http://mat1.gtimg.com/hn/chenxiang/liqianwen/game_diandian/img/drop23.png";
+//								monsterImage[4].src="http://mat1.gtimg.com/hn/chenxiang/liqianwen/game_diandian/img/drop24.png";
+								$(".bg_3_long").css('background-image','url(http://7xk4uo.com1.z0.glb.clouddn.com/hy72bg_l3.jpg)');
+								
+								setTimeout(function(){
+									$("#tanceng").attr('src','http://mat1.gtimg.com/hn/chenxiang/liqianwen/game_diandian/img/tc32.jpg');
+									$(".flicker").attr('src','http://mat1.gtimg.com/hn/chenxiang/liqianwen/game_diandian/img/word_lhb.png');
+								},1000);
+							}
+							gameLevel++;
+							
+							initMonster();
+							reset();
+							main();
+							countDown();
+						}
+					}
+				}					
+			});
+				
+				var rankStr = '';
+				
+				$("#btn_rank").click(function() {
+					$(".mask-rank").show();
+					$("#mask-end").hide();
+				});
+				$("#blank-game").click(function() {
+					$(".mask-rank").hide();
+					$("#mask-end").show();
+				});
+				$("#share-game").click(function() {
+					$("#mask-share").show();
+				});
+				$("#mask-share").click(function() {
+					$("#mask-share").hide();
+				});
+			
+				var nowP;
+				var rankData = [];	
+				var lastScore = 0;
+				AV.initialize('G6wculYbfr0PoDxdg3kpiR63-gzGzoHsz', 'OEk9gcdYlvAx3MbwvKHfmFMM');
+				var gameStatus = 0; //0 未开始   1 开始  2 结束
+				var yestoday = new Date();
+				
+				var today = new Date();
+				if( today.getHours() < 12 ){
+					yestoday.setDate(yestoday.getDate()-1);
+					yestoday.setHours(12);
+					yestoday.setMinutes(0);
+					yestoday.setSeconds(0);
+					yestoday.setMilliseconds(0);
+				}else{
+					yestoday.setHours(12);
+					yestoday.setMinutes(0);
+					yestoday.setSeconds(0);
+					yestoday.setMilliseconds(0);
+				}
+				
+				$("#btn_enter").click(function() {
+					console.log('rank_part');
+					var query = new AV.Query('rank');
+//					query.greaterThan('createdAt',yestoday);
+					query.equalTo('activeName', 'lanshanshui');
+					query.descending('score');
+					query.limit(150);
+					
+					query.find().then(function(results) {
+						
+						for(var i = 0; i < results.length &&  rankData.length < 50  ; i++) {
+							var tempObj = new Object();
+							
+							tempObj.phoneNum = results[i].get('phoneNum');
+							tempObj.nickName = results[i].get('nickName');
+							tempObj.score = results[i].get('score');
+							
+							var isRepeat = true;
+							
+							for( var j=0; j< rankData.length; j++ ){
+								if( tempObj.phoneNum == rankData[j].phoneNum ){
+									isRepeat = false;
+									break;
+								}
+							}
+							
+							if( isRepeat ){
+								rankData.push(tempObj);
+								
+								rankStr += "<li><ul><li><i>" + rankData.length + "</i> </li><li>" + tempObj.nickName + "</li><li>" + tempObj.score + "</li></ul></li>";
+								
+								
+							}
+							
+						}
+						console.log(rankData);
+						
+						console.log( rankStr );
+						console.log( lastScore );
+						if( rankData.length < 50 ){
+							lastScore = 0;
+						}else{
+							lastScore = rankData[ rankData.length-1 ].score;
+						}
+						
+						$("#rank-item").html(rankStr);
+						
+					});
+
+				});
+
+				function subRank(score) {
+					
+//					myRank = rankData.length;
+					if( $("#rank-item").html() == "" ){
+						$("#rank-item").html(rankStr);
+					}
+					console.log(  score );
+					if(score > lastScore) {
+						if( rankData.length < 1 ){
+							$(".rank .content").append("<li><ul><li><i>1</i> </li><li>" + userData.nickName + "</li><li>" + score + "</li></ul></li>");
+						}else{
+							
+							for(var i = 0; i < rankData.length; i++) {
+								myRank = i + 1;
+								if(score > rankData[i].score) {
+									break;
+								}
+							}
+							
+							
+							if( score > rankData[ rankData.length-1 ].score ){
+								$(".rank .content>ul>li").eq(myRank - 1).before("<li><ul><li><i>" + myRank + "</i> </li><li>" + userData.nickName + "</li><li>" + score + "</li></ul></li>");
+								$(".rank .content>ul>li").eq(myRank - 1).nextAll().each(function() {
+									var me = $(this);
+									var trank = parseInt(me.find('i').text()) + 1;
+									me.find('i').text(trank);
+								});
+								rankData.splice( myRank-1,0,{nickName:userData.nickName,phoneNum:userData.openID,score:score} );
+							}else{
+								$(".rank .content").append("<li><ul><li><i>"+ (parseInt(myRank)+1) +"</i> </li><li>" + userData.nickName + "</li><li>" + score + "</li></ul></li>");
+								rankData.push( {nickName:userData.nickName,phoneNum:userData.openID,score:score} );
+							}
+							
+							
+						}
+
+						var TodoFolder = AV.Object.extend('rank');
+						var todoFolder = new TodoFolder();
+						todoFolder.set('nickName', userData.nickName);
+						todoFolder.set('phoneNum', userData.openID);
+						todoFolder.set('activeName', 'huayuan');
+						todoFolder.set('score', score);
+
+						todoFolder.save().then(function(todo) {
+							isSub = false;
+						}, function(error) {
+							alert(JSON.stringify(error));
+						});
+					}
+
+				}
+
+				/*进度条结束*/
+
+//			});
+
+			window.shareData = { // 微信分享词
+				"imgUrl": "http://mat1.gtimg.com/hn/ly/0526dyzs/weixin.jpg",
+				"tLink": "http://hn.qq.com/zt2017/17m/mjhc.htm",
+				"tTitle": "参加蓝山水湘江保卫战，每天赢话费。",
+				"tContent": "连续30天！手机话费、流量和qq公仔等你来拿。"
+			};
+		</script>
+		<script type="text/javascript" src="http://mat1.gtimg.com/hn/chenxiang/js/shareAndPgv.js"></script>
+	</body>
+
+</html>
+<!--[if !IE]>|xGv00|865c056161f2989676f709f120098a3f<![endif]-->

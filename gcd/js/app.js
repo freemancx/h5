@@ -40,7 +40,7 @@ $(window).load(function() {
 		}
 	},500);
 	
-	$(".page-04").show().addClass('animated');
+//	$(".page-03").show().addClass('animated');
 	showMap();
 	
 });
@@ -111,23 +111,64 @@ $("#open-jz").one('touchend',function(){
 });
 
 $("#go-map").one('touchend',function(){
-	showMap();
-	$("#mask-jz").fadeOut(800);
+	$("#juanzhou").fadeOut(800);
+	$("#rule").show();
 	
-	
-	
+	$("#rule").one('touchend',function(){
+		showMap();
+		$("#mask-jz").fadeOut(800);
+	});
 });
 
 function showMap(){
 	$("#map").show();
 	setTimeout(function(){
-		var mySwiper = new Swiper('.swiper-container',{
-			freeMode : true,
-			freeModeMomentumBounce : false,
-			freeModeMomentumRatio : 0.6,
-			freeModeMomentumVelocityRatio : 0.5,
-			resistanceRatio : 0,
-		})
-	},100)
-	
+//		
+	},100);
 }
+
+var jd = document.getElementById("jd");
+var wd = document.getElementById("wd");
+$("#map").scroll(function(e){
+	var sl = $("#map").scrollLeft();
+	
+	jd.innerText = parseInt( sl/8 + 20 ) +'°'+ (sl/13).toFixed(4); 
+	wd.innerText = parseInt( sl/17 + 12 ) +'°'+ (sl/27).toFixed(4);
+});
+
+var wasTansuo = [];
+for (var i=0;i<10;i++) {
+	wasTansuo[i] = false;
+}
+var score = 0;
+$(".zuobiao").click(function(){
+	var id = parseInt( $(this).attr('id').charAt(2) );
+	$("#mask-card img").attr('src','http://7xketu.com1.z0.glb.clouddn.com/gcdcard'+ id +'.jpg');
+	setTimeout(function(){
+		$("#mask-card").show();
+	},80);
+	
+	console.log(id);
+	if( wasTansuo[id] == false ){
+		wasTansuo[id] = true;
+		score++;
+		$("#ts-jd").css('width', 40+score*35 +'px')
+	}
+	if( score >= 3 ){
+		$("#go-renzheng").addClass('ready');
+	}
+});
+
+$("#go-renzheng").click(function(){
+	if( $(this).hasClass('ready') ){
+		$(".page-05").show();
+	}
+});
+$("#mask-card").on('touchend',function(e){
+	e.preventDefault();
+	$(this).hide();
+//	setTimeout(function(){
+//		
+//	})
+	
+});

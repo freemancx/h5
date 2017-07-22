@@ -40,8 +40,8 @@ $(window).load(function() {
 		}
 	},500);
 	
-//	$(".page-03").show().addClass('animated');
-	showMap();
+	$(".page-03").show().addClass('animated');
+//	showMap();
 	
 });
 
@@ -114,7 +114,8 @@ $("#go-map").one('touchend',function(){
 	$("#juanzhou").fadeOut(800);
 	$("#rule").show();
 	
-	$("#rule").one('touchend',function(){
+	$("#rule").on('touchend',function(e){
+		e.preventDefault();
 		showMap();
 		$("#mask-jz").fadeOut(800);
 	});
@@ -162,6 +163,8 @@ $(".zuobiao").click(function(){
 $("#go-renzheng").click(function(){
 	if( $(this).hasClass('ready') ){
 		$(".page-05").show();
+	}else{
+		$("#mask-jz").show();
 	}
 });
 $("#mask-card").on('touchend',function(e){

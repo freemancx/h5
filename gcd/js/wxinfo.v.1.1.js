@@ -61,3 +61,4 @@ if(userData.nickName == false || userData.nickName == 'false' || userData.nickNa
 	setCookie('headimgurl', userData.headimgurl);
 	setCookie('openID', userData.openID);
 }
+var saveData = JSON.parse(getCookie('saveData'));

@@ -38,9 +38,8 @@ function urlToJson() { //默认参数为当前链接
 window.userData = new Object();
 
 var urlData = urlToJson();
+var saveData = new Object();
 userData.nickName = false;
-//跳转前把信息存入cookie
-setCookie('saveData',JSON.stringify(urlData));	
 
 if(urlData == false) {
 	userData.nickName = getCookie('nickName');
@@ -51,14 +50,16 @@ if(urlData == false) {
 	userData.headimgurl = urlData.headimgurl;
 	userData.openID = urlData.openID;
 }
-console.log(urlData.nickName);
+console.log(userData.nickName);
 var pageUrl = window.location.href;
 pageUrl = pageUrl.split('?')[0]; //去掉参数
 if(userData.nickName == false || userData.nickName == 'false' || userData.nickName == "undefined" || typeof(userData.nickName) == "undefined") {
+	//跳转前把信息存入cookie
+	setCookie('saveData',JSON.stringify(urlData));	
 	window.location.replace('http://webox.daxiangw.com/daxiangw/h5/wxinfo?redirect_uri=' + pageUrl);
 } else {
+	saveData = JSON.parse(getCookie('saveData'));
 	setCookie('nickName', userData.nickName);
 	setCookie('headimgurl', userData.headimgurl);
 	setCookie('openID', userData.openID);
 }
-var saveData = JSON.parse(getCookie('saveData'));

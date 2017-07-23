@@ -141,7 +141,7 @@ body,
 
 .loading-txt {
 	position: absolute;
-	width: 0%;
+	width: 11px;
 	height: 100%;
 	background-image: url(http://7xketu.com1.z0.glb.clouddn.com/gcdload_bar.jpg);
 	background-size: auto 100%;
@@ -153,7 +153,7 @@ body,
 }
 
 .page-02 {
-	background-image: url(http://7xketu.com1.z0.glb.clouddn.com/gcdbg2.jpg);
+	
 }
 
 .chuizi {
@@ -257,7 +257,7 @@ body,
 }*/
 
 .page-03 {
-	background-image: url(http://7xketu.com1.z0.glb.clouddn.com/gcdbg5.jpg);
+	
 }
 
 .liefeng,
@@ -273,7 +273,7 @@ body,
 }
 
 .podong {
-	background-image: url(http://7xketu.com1.z0.glb.clouddn.com/gcdbg4.jpg);
+	
 }
 
 @keyframes drop {
@@ -484,7 +484,7 @@ body,
 #map .full-bg{
 	width: 1920px;
 	height: 1040px;
-	background-image: url(http://7xketu.com1.z0.glb.clouddn.com/gcdbg6.jpg);
+	
 	position: relative;
 	overflow: hidden;
 }
@@ -629,9 +629,27 @@ body,
 }
 
 .page-05{
-	background-image: url(http://7xketu.com1.z0.glb.clouddn.com/gcdbg8.jpg);
+	
 	
 }
 #mask-card img{
 	padding-top: 100px;
+}
+#link-photo{
+	    position: absolute;
+    top: 530px;
+    left: 100px;
+}
+#link-zhuanti{
+	    position: absolute;
+    top: 530px;
+    right: 100px;
+}
+#tansuo-count{
+	    width: 65px;
+    top: 345px;
+    left: 334px;
+    text-align: center;
+    font-size: 40px;
+    color: #2a2622;
 }

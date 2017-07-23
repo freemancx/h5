@@ -1,46 +1,154 @@
 $("body").on('touchmove', function(e) {
 	e.preventDefault();
 })
-//音频s
-if(typeof WeixinJSBridge == "undefined") {
-	var i = 0;
-	if(document.addEventListener) {
-		document.addEventListener("WeixinJSBridgeReady", function func() {
-			$("#bgm")[0].play();
-		}, false);
+
+//预加载
+function preloadImages(arr, stepfun, overfun) {
+	var newimages = [],
+		loadedimages = 0;
+	var arr = (typeof arr != "object") ? [arr] : arr;
+
+	function imageloadpost() {
+		loadedimages++;
+		stepfun && stepfun();
+		if(loadedimages == arr.length) {
+			console.log("图片已经加载完成");
+			overfun && overfun();
+		}
+	}
+	for(var i = 0; i < arr.length; i++) {
+		newimages[i] = new Image();
+		newimages[i].src = arr[i];
+		newimages[i].onload = function() {
+			imageloadpost();
+		}
+		newimages[i].onerror = function() {
+			console.log("第" + i + "张图片加载出现问题");
+			imageloadpost();
+		}
 	}
 }
-var isPlay = true;
-$("#music-icon").click(function() {
-	if($(this).hasClass('pause')) {
-		isPlay = true;
-		$(this).removeClass('pause');
-		$("#bgm")[0].play();
-	} else {
-		isPlay = false;
-		$(this).addClass('pause');
-		$("#bgm")[0].pause();
-	}
-});
-//音频e
+
 
 $(window).load(function() {
+	$("#bgm").attr('src',$("#bgm").attr('data-src'));
+	$("#bgm")[0].play();
+	//音频s
+	if(typeof WeixinJSBridge == "undefined") {
+		var i = 0;
+		if(document.addEventListener) {
+			document.addEventListener("WeixinJSBridgeReady", function func() {
+				$("#bgm")[0].play();
+			}, false);
+		}
+	}
+	var isPlay = true;
+	$("#music-icon").show().click(function() {
+		if($(this).hasClass('pause')) {
+			isPlay = true;
+			$(this).removeClass('pause');
+			$("#bgm")[0].play();
+		} else {
+			isPlay = false;
+			$(this).addClass('pause');
+			$("#bgm")[0].pause();
+		}
+	});
+	//音频e
+	
+	var imgList = [
+		"http://7xketu.com1.z0.glb.clouddn.com/gcdbg1.jpg",
+		"http://7xketu.com1.z0.glb.clouddn.com/gcdt1.jpg",
+		"http://7xketu.com1.z0.glb.clouddn.com/gcdload_bar.jpg",
+		"http://7xketu.com1.z0.glb.clouddn.com/gcdbg2.jpg",
+		"http://7xketu.com1.z0.glb.clouddn.com/gcdbg5.jpg",
+		"http://7xketu.com1.z0.glb.clouddn.com/gcdbg1.jpg",
+		"http://7xketu.com1.z0.glb.clouddn.com/gcdbg4.jpg",
+		"http://7xketu.com1.z0.glb.clouddn.com/gcdt52.png",
+		"http://7xketu.com1.z0.glb.clouddn.com/gcdjz_center.jpg",
+		"http://7xketu.com1.z0.glb.clouddn.com/gcdbg6.jpg",
+		"http://7xketu.com1.z0.glb.clouddn.com/gcdt74.png",
+		"http://7xketu.com1.z0.glb.clouddn.com/gcdt76.png",
+		"http://7xketu.com1.z0.glb.clouddn.com/gcdbg8.jpg",
+		"http://7xketu.com1.z0.glb.clouddn.com/gcdt21.jpg",
+		"http://7xketu.com1.z0.glb.clouddn.com/gcdt22.jpg",
+		"http://7xketu.com1.z0.glb.clouddn.com/gcdt23.jpg",
+		"http://7xketu.com1.z0.glb.clouddn.com/gcdt31.jpg",
+		"http://7xketu.com1.z0.glb.clouddn.com/gcdt32.jpg",
+		"http://7xketu.com1.z0.glb.clouddn.com/gcdt41.png",
+		"http://7xketu.com1.z0.glb.clouddn.com/gcdt3.png",
+		"http://7xketu.com1.z0.glb.clouddn.com/gcdchuizi.png",
+		"http://7xketu.com1.z0.glb.clouddn.com/gcdchuizi.png",
+		"http://7xketu.com1.z0.glb.clouddn.com/gcdchuizi.png",
+		"http://7xketu.com1.z0.glb.clouddn.com/gcdbianfu.png",
+		"http://7xketu.com1.z0.glb.clouddn.com/gcdcloud1.png",
+		"http://7xketu.com1.z0.glb.clouddn.com/gcdcloud2.png",
+		"http://7xketu.com1.z0.glb.clouddn.com/gcdcloud3.png",
+		"http://7xketu.com1.z0.glb.clouddn.com/gcdt51.png",
+		"http://7xketu.com1.z0.glb.clouddn.com/gcdcloud1.png",
+		"http://7xketu.com1.z0.glb.clouddn.com/gcdcloud3.png",
+		"http://7xketu.com1.z0.glb.clouddn.com/gcdcloud2.png",
+		"http://7xketu.com1.z0.glb.clouddn.com/gcdt75.png",
+		"http://7xketu.com1.z0.glb.clouddn.com/gcdt71.png",
+		"http://7xketu.com1.z0.glb.clouddn.com/gcdt72.png",
+		"http://7xketu.com1.z0.glb.clouddn.com/gcdt81.png",
+		"http://7xketu.com1.z0.glb.clouddn.com/gcdt82.png",
+		"http://7xketu.com1.z0.glb.clouddn.com/gcdt83.png",
+		"http://7xketu.com1.z0.glb.clouddn.com/gcdt84.png",
+		"http://7xketu.com1.z0.glb.clouddn.com/gcdt85.png",
+		"http://7xketu.com1.z0.glb.clouddn.com/gcdjz_top.png",
+		"http://7xketu.com1.z0.glb.clouddn.com/gcdt61.png",
+		"http://7xketu.com1.z0.glb.clouddn.com/gcdjz_bottom.png",
+		"http://7xketu.com1.z0.glb.clouddn.com/gcdt73.png",
+		"http://7xketu.com1.z0.glb.clouddn.com/gcdcard1.jpg",
+		"http://7xketu.com1.z0.glb.clouddn.com/gcdcard2.jpg",
+		"http://7xketu.com1.z0.glb.clouddn.com/gcdcard3.jpg",
+		"http://7xketu.com1.z0.glb.clouddn.com/gcdcard4.jpg",
+		"http://7xketu.com1.z0.glb.clouddn.com/gcdcard5.jpg",
+		"http://7xketu.com1.z0.glb.clouddn.com/gcdcard6.jpg",
+		"http://7xketu.com1.z0.glb.clouddn.com/gcdcard7.jpg",
+		"http://7xketu.com1.z0.glb.clouddn.com/gcdcard8.jpg",
+		"http://7xketu.com1.z0.glb.clouddn.com/gcdcard9.jpg",
+		"http://7xketu.com1.z0.glb.clouddn.com/gcdcard0.jpg",
+	];
+	
+	var step =  300/imgList.length;
+	var loadW = 11;
+	var loadOver = false;
+	preloadImages(imgList, function() {
+		loadW += step;
+		$(".loading-txt").css('width', parseInt(loadW));
+	}, function() {
+		loadOver = true;
+	});
 	var x = 0;
 	var $t1List = $(".t1 span");
 	var timer = setInterval(function(){
-		$t1List.eq(x).css('display','block');
-		x++;
 		if( x == 14 ){
-			clearInterval(timer);
-			$(".loading-txt").css('width','100%');
-			setTimeout(function(){
-				$(".page-02").show().addClass('animated');
+			if( loadOver ){
+				clearInterval(timer);
+				$(".lazyimg-div img").each(function(){
+					var url = $(this).attr('data-src');
+					$(this).attr('src',url);
+				});
 				
-			},100);
+				$(".lazybg-div").each(function(){
+					var style = $(this).attr('data-style');
+					$(this).attr('style',style);
+				});
+				
+				setTimeout(function(){
+					$(".page-02").show().addClass('animated');
+					
+				},1400);
+			}
+		}else{
+			$t1List.eq(x).css('display','block');
+			x++;
 		}
 	},500);
 	
-	$(".page-03").show().addClass('animated');
+//	$(".page-05").show().addClass('animated');
 //	showMap();
 	
 });
@@ -153,16 +261,21 @@ $(".zuobiao").click(function(){
 	if( wasTansuo[id] == false ){
 		wasTansuo[id] = true;
 		score++;
-		$("#ts-jd").css('width', 40+score*35 +'px')
+		$("#ts-jd").css('width', 40+score*35 +'px');
+		$("#jd-txt").text('探险进度：'+ score +'/10')
 	}
 	if( score >= 3 ){
 		$("#go-renzheng").addClass('ready');
+		$(".page-05 .xunzhang").attr('src','http://7xketu.com1.z0.glb.clouddn.com/gcdt82.png');
+	}
+	if( score >= 8 ){
+		$(".page-05 .xunzhang").attr('src','http://7xketu.com1.z0.glb.clouddn.com/gcdt83.png');
 	}
 });
 
 $("#go-renzheng").click(function(){
 	if( $(this).hasClass('ready') ){
-		$(".page-05").show();
+		$(".page-05").show().addClass('animated');
 	}else{
 		$("#mask-jz").show();
 	}

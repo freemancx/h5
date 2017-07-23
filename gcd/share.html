@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>探寻鬼吹灯</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+		<script src="js/w640.js" type="text/javascript" charset="utf-8"></script>
+		<link rel="stylesheet" type="text/css" href="css/h5baseV4.5.css"/>
+		<style type="text/css">
+			html,body{
+				height: 100%;
+				overflow: hidden;
+			}
+		</style>
+	</head>
+	<body>
+		<img src="" id="img" width="640px" height="1040px" style="margin: 0;"/>
+		
+		
+		<script>
+			//将url中的参数转换成json格式
+			function urlToJson(){	//默认参数为当前链接
+				var url = arguments[0] || window.location.href;
+				if( url.indexOf('?')<0 ){
+					return false;		//不存在参数返回false
+				}else{
+					var paraString = url.substring(url.indexOf('?') + 1,url.length);
+					var paraJsonString;
+					paraJsonString = paraString.replace(/\=/g,"\"\:\"");
+					paraJsonString = paraJsonString.replace(/\&/g,"\",\"");
+					paraJsonString = paraJsonString.replace(/\+/g," ");
+					paraJsonString = paraJsonString.replace(/\%26/g,"&");
+					paraJsonString = paraJsonString.replace(/\%2F/g,"\/");
+					paraJsonString = paraJsonString.replace(/\%0A/g,"\:");
+					paraJsonString = '{"' + paraJsonString + '"}';
+				    return JSON.parse(paraJsonString);
+				}
+			}
+			var urlData = urlToJson();
+			
+			document.getElementById("img").src = urlData.imgUrl;
+			
+			window.shareData = {    // 微信分享词
+			    "imgUrl" : "http://mat1.gtimg.com/hn/cx/2017/wznm/weixin.jpg",
+			    "tLink": window.location.href,
+			    "tTitle" : "和你一起，追逐星辰大海！",
+			    "tContent" : "腾讯·大湘网五周年与你同袍为伍",
+			    "commas" :""
+			};
+		</script>
+		<script src="js/shareAndMTA.js" type="text/javascript" charset="utf-8"></script>
+
+	</body>
+</html>

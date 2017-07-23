@@ -199,9 +199,9 @@
 						file.save().then(function(obj) {
 							var picId = obj.url();
 							console.log(picId);
-							window.shareData.tLink = 'http://hn.qq.com/zt2017/17m/share.htm?imgUrl='+picId;
+							window.shareData.tLink = 'share.html?imgUrl='+picId;
 						}, function(err) {}).then(function(){
-							$("#upload-txt").text('上传完成,长按保存或分享给朋友吧!');
+							$("#upload-txt").text('上传完成,长按保存分享给朋友吧!');
 						});
 					}
 					wenzi.src = 'img/x'+ cursex + level +'.png';

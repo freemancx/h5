@@ -59,59 +59,59 @@ $(window).load(function() {
 	//音频e
 	
 	var imgList = [
-		"http://7xketu.com1.z0.glb.clouddn.com/gcdbg1.jpg",
-		"http://7xketu.com1.z0.glb.clouddn.com/gcdt1.jpg",
-		"http://7xketu.com1.z0.glb.clouddn.com/gcdload_bar.jpg",
-		"http://7xketu.com1.z0.glb.clouddn.com/gcdbg2.jpg",
-		"http://7xketu.com1.z0.glb.clouddn.com/gcdbg5.jpg",
-		"http://7xketu.com1.z0.glb.clouddn.com/gcdbg1.jpg",
-		"http://7xketu.com1.z0.glb.clouddn.com/gcdbg4.jpg",
-		"http://7xketu.com1.z0.glb.clouddn.com/gcdt52.png",
-		"http://7xketu.com1.z0.glb.clouddn.com/gcdjz_center.jpg",
-		"http://7xketu.com1.z0.glb.clouddn.com/gcdbg6.jpg",
-		"http://7xketu.com1.z0.glb.clouddn.com/gcdt74.png",
-		"http://7xketu.com1.z0.glb.clouddn.com/gcdt76.png",
-		"http://7xketu.com1.z0.glb.clouddn.com/gcdbg8.jpg",
-		"http://7xketu.com1.z0.glb.clouddn.com/gcdt21.jpg",
-		"http://7xketu.com1.z0.glb.clouddn.com/gcdt22.jpg",
-		"http://7xketu.com1.z0.glb.clouddn.com/gcdt23.jpg",
-		"http://7xketu.com1.z0.glb.clouddn.com/gcdt31.jpg",
-		"http://7xketu.com1.z0.glb.clouddn.com/gcdt32.jpg",
-		"http://7xketu.com1.z0.glb.clouddn.com/gcdt41.png",
-		"http://7xketu.com1.z0.glb.clouddn.com/gcdt3.png",
-		"http://7xketu.com1.z0.glb.clouddn.com/gcdchuizi.png",
-		"http://7xketu.com1.z0.glb.clouddn.com/gcdchuizi.png",
-		"http://7xketu.com1.z0.glb.clouddn.com/gcdchuizi.png",
-		"http://7xketu.com1.z0.glb.clouddn.com/gcdbianfu.png",
-		"http://7xketu.com1.z0.glb.clouddn.com/gcdcloud1.png",
-		"http://7xketu.com1.z0.glb.clouddn.com/gcdcloud2.png",
-		"http://7xketu.com1.z0.glb.clouddn.com/gcdcloud3.png",
-		"http://7xketu.com1.z0.glb.clouddn.com/gcdt51.png",
-		"http://7xketu.com1.z0.glb.clouddn.com/gcdcloud1.png",
-		"http://7xketu.com1.z0.glb.clouddn.com/gcdcloud3.png",
-		"http://7xketu.com1.z0.glb.clouddn.com/gcdcloud2.png",
-		"http://7xketu.com1.z0.glb.clouddn.com/gcdt75.png",
-		"http://7xketu.com1.z0.glb.clouddn.com/gcdt71.png",
-		"http://7xketu.com1.z0.glb.clouddn.com/gcdt72.png",
-		"http://7xketu.com1.z0.glb.clouddn.com/gcdt81.png",
-		"http://7xketu.com1.z0.glb.clouddn.com/gcdt82.png",
-		"http://7xketu.com1.z0.glb.clouddn.com/gcdt83.png",
-		"http://7xketu.com1.z0.glb.clouddn.com/gcdt84.png",
-		"http://7xketu.com1.z0.glb.clouddn.com/gcdt85.png",
-		"http://7xketu.com1.z0.glb.clouddn.com/gcdjz_top.png",
-		"http://7xketu.com1.z0.glb.clouddn.com/gcdt61.png",
-		"http://7xketu.com1.z0.glb.clouddn.com/gcdjz_bottom.png",
-		"http://7xketu.com1.z0.glb.clouddn.com/gcdt73.png",
-		"http://7xketu.com1.z0.glb.clouddn.com/gcdcard1.jpg",
-		"http://7xketu.com1.z0.glb.clouddn.com/gcdcard2.jpg",
-		"http://7xketu.com1.z0.glb.clouddn.com/gcdcard3.jpg",
-		"http://7xketu.com1.z0.glb.clouddn.com/gcdcard4.jpg",
-		"http://7xketu.com1.z0.glb.clouddn.com/gcdcard5.jpg",
-		"http://7xketu.com1.z0.glb.clouddn.com/gcdcard6.jpg",
-		"http://7xketu.com1.z0.glb.clouddn.com/gcdcard7.jpg",
-		"http://7xketu.com1.z0.glb.clouddn.com/gcdcard8.jpg",
-		"http://7xketu.com1.z0.glb.clouddn.com/gcdcard9.jpg",
-		"http://7xketu.com1.z0.glb.clouddn.com/gcdcard0.jpg",
+		"img/bg1.jpg",
+		"img/t1.jpg",
+		"img/load_bar.jpg",
+		"img/bg2.jpg",
+		"img/bg5.jpg",
+		"img/bg1.jpg",
+		"img/bg4.jpg",
+		"img/t52.png",
+		"img/jz_center.jpg",
+		"img/bg6.jpg",
+		"img/t74.png",
+		"img/t76.png",
+		"img/bg8.jpg",
+		"img/t21.jpg",
+		"img/t22.jpg",
+		"img/t23.jpg",
+		"img/t31.jpg",
+		"img/t32.jpg",
+		"img/t41.png",
+		"img/t3.png",
+		"img/chuizi.png",
+		"img/chuizi.png",
+		"img/chuizi.png",
+		"img/bianfu.png",
+		"img/cloud1.png",
+		"img/cloud2.png",
+		"img/cloud3.png",
+		"img/t51.png",
+		"img/cloud1.png",
+		"img/cloud3.png",
+		"img/cloud2.png",
+		"img/t75.png",
+		"img/t71.png",
+		"img/t72.png",
+		"img/t81.png",
+		"img/t82.png",
+		"img/t83.png",
+		"img/t84.png",
+		"img/t85.png",
+		"img/jz_top.png",
+		"img/t61.png",
+		"img/jz_bottom.png",
+		"img/t73.png",
+		"img/card1.jpg",
+		"img/card2.jpg",
+		"img/card3.jpg",
+		"img/card4.jpg",
+		"img/card5.jpg",
+		"img/card6.jpg",
+		"img/card7.jpg",
+		"img/card8.jpg",
+		"img/card9.jpg",
+		"img/card0.jpg",
 	];
 	
 	var step =  300/imgList.length;
@@ -254,7 +254,7 @@ for (var i=0;i<10;i++) {
 var score = 0;
 $(".zuobiao").click(function(){
 	var id = parseInt( $(this).attr('id').charAt(2) );
-	$("#mask-card img").attr('src','http://7xketu.com1.z0.glb.clouddn.com/gcdcard'+ id +'.jpg');
+	$("#mask-card img").attr('src','img/card'+ id +'.jpg');
 	setTimeout(function(){
 		$("#mask-card").show();
 	},80);
@@ -268,10 +268,12 @@ $(".zuobiao").click(function(){
 	}
 	if( score >= 3 ){
 		$("#go-renzheng").addClass('ready');
-		$(".page-05 .xunzhang").attr('src','http://7xketu.com1.z0.glb.clouddn.com/gcdt82.png');
+	}
+	if( score >= 4 ){
+		$(".page-05 .xunzhang").attr('src','img/t82.png');
 	}
 	if( score >= 8 ){
-		$(".page-05 .xunzhang").attr('src','http://7xketu.com1.z0.glb.clouddn.com/gcdt83.png');
+		$(".page-05 .xunzhang").attr('src','img/t83.png');
 	}
 });
 

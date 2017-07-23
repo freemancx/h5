@@ -1,6 +1,6 @@
-$("body").on('touchmove', function(e) {
-	e.preventDefault();
-})
+//$("body").on('touchmove', function(e) {
+//	e.preventDefault();
+//})
 
 //预加载
 function preloadImages(arr, stepfun, overfun) {
@@ -47,10 +47,12 @@ $(window).load(function() {
 		if($(this).hasClass('pause')) {
 			isPlay = true;
 			$(this).removeClass('pause');
+			$(this).addClass('rotateN');
 			$("#bgm")[0].play();
 		} else {
 			isPlay = false;
 			$(this).addClass('pause');
+			$(this).removeClass('rotateN');
 			$("#bgm")[0].pause();
 		}
 	});
@@ -189,10 +191,10 @@ $(".chuizi").click(function(){
 			case 3:{
 				$(".podong").show();
 				$("#poqiangbg")[0].play();
+				$("#bianfubg")[0].play();
 				
 				setTimeout(function(){
 					$(".page-03").show().addClass('animated');
-					$("#bianfubg")[0].play();
 				},2000);
 				break;
 			}

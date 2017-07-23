@@ -653,3 +653,67 @@ body,
     font-size: 40px;
     color: #2a2622;
 }
+
+#page-photo{
+	display: block;
+	z-index: 11;
+	background-image: url(../img/xbgl.jpg);
+}
+
+#page-last{
+	display: block;
+	z-index: 5;
+}
+#page-photo .btn{
+    position: absolute;
+    top: 860px;
+    z-index: 9;
+}
+#btn-qr{
+	right: 100px;
+}
+#btn-up{
+	left: 120px;
+}
+#yasuo{
+    top: 263px;
+    left: 215px;
+    width: 246px;
+    height: 317px;
+}
+canvas{
+	display: block;
+}
+#sroTips{
+    position: absolute;
+    top: 245px;
+    left: 140px;
+}
+.sex{
+    position: absolute;
+    top: 630px;
+}
+#nan{
+	left: 210px;
+}
+#nv{
+	right: 180px;
+}
+#xiangji{
+    position: absolute;
+    padding: 150px;
+    top: 266px;
+    left: 162px;
+    z-index: 10;
+}
+.hide{
+	display: none;
+}
+#upload-txt{
+	    position: fixed;
+    bottom: 20px;
+    text-align: center;
+    color: #fff;
+    width: 100%;
+    font-size: 18px;
+}

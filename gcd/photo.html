@@ -1,9 +1,344 @@
 <!DOCTYPE html>
 <html>
+
 	<head>
-		<meta charset="UTF-8">
-		<title></title>
+		<meta charset="utf-8" />
+		<title>探寻鬼吹灯</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+		<script src="js/w640.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/wxinfo.v.1.1.js" type="text/javascript" charset="utf-8"></script>
+		<link rel="stylesheet" type="text/css" href="css/h5baseV4.5.css" />
+		<link rel="stylesheet" type="text/css" href="css/style.css" />
 	</head>
+
 	<body>
+		<div class="page" id="page-photo">
+			<div id="yasuo">
+				<div class="content">
+					<canvas id="showCanvas" width="246" height="317"></canvas>
+				</div>
+			</div>
+			
+			<img src="img/xtips.png" id="sroTips" class="hide"/>
+			<!--<img src="http://mat1.gtimg.com/hn/cx/2017/wznm/slogan.png" class="hide" style="position: absolute; right: 100px; top: 110px;"/>-->
+			
+			<img src="img/xbtn_nan.png" class="sex" id="nan"/>
+			<img src="img/xbtn_nv.png" class="sex" id="nv"/>
+			
+			<img src="img/xbtn_share.png" id="btn-qr" class="btn hide"/>
+			<img src="img/xbtn_huan.png" id="btn-up" class="btn hide"/>
+			
+			<img src="img/xicon_xj.png" id="xiangji"/>
+			
+			<input id='myFile' type="file" style="display: none;" />
+			
+		</div>
+		<div class="page" id="page-last">
+			<canvas id="lastCanvas" width="640" height="1040">
+				
+			</canvas>
+			<img src="" id="preload"/>
+			<p id="upload-txt">
+				上传中
+			</p>
+		</div>
+		
+		<audio id="paizhao" src="http://mat1.gtimg.com/hn/cx/sdr7s/paizhao.mp3" preload style="display: none;"></audio>
+		<script src="js/jquery-1.11.3.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/exif.js" type="text/javascript" charset="utf-8"></script>
+		<script src="//mat1.gtimg.com/hn/cx/js/touch-0.2.14.min.js"></script>
+		<script src="//cdn1.lncld.net/static/js/3.0.2/av-min.js"></script>
+		<script type="text/javascript">
+			
+			//传文件
+			const appId = 'G6wculYbfr0PoDxdg3kpiR63-gzGzoHsz';
+			const appKey = 'OEk9gcdYlvAx3MbwvKHfmFMM';
+			AV.init({ appId, appKey });
+			
+			var base64;
+			var drawImg = new Image();
+			drawImg.onload = mydraw;
+			var showCanvas = document.getElementById('showCanvas');
+			var ctx = showCanvas.getContext("2d");
+			ctx.fillStyle="#ffffff";
+			
+			var baseX = 0;
+			var baseY = 0;
+			var baseW = 246;
+			var baseH = 317;
+			var curX = baseX;
+			var curY = baseY;
+			var curW = baseW;
+			var curH = baseH;
+			var initialScale = 1;
+			var currentScale;
+			var hasImg = false;
+			var curImg = 0;
+			var cursex = 'nan';
+			var score = saveData.score;
+			var level = 1;
+			if( !score ){
+				score = 30;
+			}
+			
+			if( score >= 30 && score < 80 ){
+				level = 2;
+			}else if( score >= 80 ){
+				level = 3;
+			}
+			
+			$("body").on('touchmove',function(e){
+				e.preventDefault();
+			})
+			$("#btn-up").on('touchend',function(){
+				$("#myFile").click();
+			});
+			$("#xiangji").on('touchend',function(e){
+				e.preventDefault();
+				$("#myFile").click();
+			});
+			
+			$("#btn-qr").on('touchend',function(){
+				endDraw();
+			});
+			
+			touch.on('#yasuo', 'touchstart', function(ev) {
+				ev.preventDefault();
+			});
+
+			touch.on('#yasuo', 'drag', dragFun);
+
+			function dragFun(ev) {
+				curX = baseX + ev.x;
+				curY = baseY + ev.y;
+				//	console.log(  curX+','+curY);
+				mydraw();
+			}
+
+			touch.on('#yasuo', 'dragend', dragendFun);
+
+			function dragendFun(ev) {
+				baseX += ev.x;
+				baseY += ev.y;
+			}
+			
+			touch.on('#yasuo', 'pinchend', pinchFun1);
+
+			function pinchFun1(ev) {
+				currentScale = ev.scale - 1;
+				currentScale = initialScale + currentScale;
+				currentScale = currentScale > 2 ? 2 : currentScale;
+				currentScale = currentScale < 0.5 ? 0.5 : currentScale;
+				curW = baseW * currentScale;
+				mydraw();
+			}
+
+			touch.on('#yasuo', 'pinchend', pinchFun2);
+
+			function pinchFun2(ev) {
+				initialScale = currentScale;
+			}
+			
+			$(".sex").click(function(){
+				cursex = $(this).attr('id');
+				sexImg.src = 'img/xhead_'+ cursex +'.png';
+			});
+			
+			var bgImg = new Image();
+			bgImg.src = 'img/xbgl.jpg';
+			bgImg.onload = function() {}
+			var qrcode = new Image();
+			qrcode.src = 'img/xerweima.png';
+			qrcode.onload = function() {} 
+			
+			var sexImg = new Image();
+			sexImg.src = 'img/xhead_nan.png';
+			sexImg.onload = function() {
+				mydraw();
+			}
+			function mydraw() {
+				curH = drawImg.height * curW / drawImg.width;
+				ctx.fillRect(0, 0, showCanvas.width, showCanvas.height);
+				ctx.drawImage(drawImg, curX, curY, curW, curH);
+				ctx.drawImage(sexImg, 0, 0);
+			}
+			
+			function test(){
+				$("#page-photo").css('z-index',120);
+				$("#page-last").css('z-index',119);
+			}
+			
+			function endDraw() {
+				$("#page-photo").fadeOut(1000);
+				
+				var lastCanvas = document.getElementById('lastCanvas');
+				var ctx2 = lastCanvas.getContext("2d");
+				var tempImg = new Image();
+				
+				tempImg.onload = function(){
+					var wenzi = new Image();
+					wenzi.onload = function(){
+						$("#paizhao")[0].play();
+						
+	//					if( curH >= 600 ){ curH = 600; }
+						ctx2.drawImage(bgImg, 0, 0, 640, 1040);
+						ctx2.drawImage(qrcode, 155, 842, 332, 158);
+						ctx2.drawImage(tempImg, 215,263, 246, 317);
+						ctx2.drawImage(wenzi, 15, 660, 640 , 40);
+						ctx2.font="28px Arial";
+						ctx2.textAlign = 'center';
+						ctx2.fillStyle = '#34251b'; 
+						var drawtext = decodeURI(userData.nickName) + " 冒险指数："+score+"%";
+						ctx2.fillText( drawtext  ,340,640);
+						
+						var base64 = lastCanvas.toDataURL("image/jpeg",0.8);
+						
+						document.getElementById("preload").src = base64;
+						
+						var file = new AV.File( 'gcd.jpg' , { base64: base64 });
+						file.save().then(function(obj) {
+							var picId = obj.url();
+							console.log(picId);
+							window.shareData.tLink = 'http://hn.qq.com/zt2017/17m/share.htm?imgUrl='+picId;
+						}, function(err) {}).then(function(){
+							$("#upload-txt").text('上传完成,长按保存或分享给朋友吧!');
+						});
+					}
+					wenzi.src = 'img/x'+ cursex + level +'.png';
+				}
+//				shareData.tContent = shareList[curImg];
+				
+				tempImg.src = showCanvas.toDataURL("image/jpeg",0.8);
+				
+//				alert(curH);
+				
+				
+			}
+			
+			function compressImage(fileDomId) { //压缩图片并旋转正确
+				var oFile = new FileReader();
+				var passFileType = /^(?:image\/bmp|image\/gif|image\/jpeg|image\/png)$/i;
+				//	var canvas = document.getElementById('compressCanvas');
+				var canvas; //= document.createElement('canvas');
+				var ctx; // = canvas.getContext("2d");
+				var img = new Image();
+				var _rotate = 0;
+				var mx = 0;
+				var my = 1;
+				var isFrist = true;
+				//测试状态
+				var _orientation = 1;
+
+				$("#" + fileDomId).on('change', function(e) {
+					if(isFrist) {
+						isFrist = false;
+						$("#xiangji").hide();
+						$(".hide").show();
+					}
+					if(!e.target || !e.target.files.length || !e.target.files[0]) {
+						return
+					};
+					var _file = e.target.files[0];
+					if(!passFileType.test(_file.type)) {
+						return
+					};
+
+					EXIF.getData(_file, function() {
+						var _dataTxt = EXIF.pretty(this);
+						var _dataJson = JSON.stringify(EXIF.getAllTags(this));
+						_rotate = 0;
+						_orientation = EXIF.getTag(this, 'Orientation');
+						//获取照片状态
+					});
+					oFile.readAsDataURL(_file);
+				});
+
+				oFile.onload = function(f) {
+					compress(this.result, baseW, baseH, function(data) { //压缩完成后执行的callback
+						drawImg.src = data;
+						//mydraw();
+					});
+				};
+
+				function compress(imgData, maxWidth, maxHeight, callback) {
+					canvas = document.createElement('canvas');
+					ctx = canvas.getContext("2d");
+					if(!imgData) {
+						return;
+					}
+					callback = callback || function() {};
+					img.onload = function() {
+						canvas.width = maxWidth; //重置canvans宽高 
+						canvas.height = maxHeight;
+						ctx.clearRect(0, 0, canvas.width, canvas.height); // canvas清屏
+
+						if(_orientation == 3) { //180°
+							if(img.height > maxWidth) { //按最大高度等比缩放
+								img.height = maxWidth * img.height / img.width;
+								img.width = maxWidth;
+							}
+							canvas.width = img.width; //重置canvans宽高 
+							canvas.height = img.height;
+							_rotate = 180;
+							ctx.rotate(_rotate * Math.PI / 180);
+							ctx.translate(-1 * img.width, -1 * img.height);
+						} else if(_orientation == 6) { //顺时针90°
+							if(img.height > maxWidth) { //按最大高度等比缩放
+								img.width = maxWidth * img.width / img.height;
+								img.height = maxWidth;
+							}
+							canvas.width = img.height; //重置canvans宽高 
+							canvas.height = img.width;
+							_rotate = 90;
+							ctx.rotate(_rotate * Math.PI / 180);
+							ctx.translate(0, -1 * maxWidth);
+						} else if(_orientation == 8) { //逆时针90°
+							if(img.height > maxWidth) { //按最大高度等比缩放
+								img.width = maxWidth * img.width / img.height;
+								img.height = maxWidth;
+							}
+							canvas.width = img.height; //重置canvans宽高 
+							canvas.height = img.width;
+							_rotate = 270;
+							ctx.rotate(_rotate * Math.PI / 180);
+							ctx.translate(-1 * img.width, 0);
+						} else { //未旋转
+							if(img.width > maxWidth) { //按最大高度等比缩放
+								img.height = maxWidth * img.height / img.width;
+								img.width = maxWidth;
+							}
+							canvas.width = img.width; //重置canvans宽高 
+							canvas.height = img.height;
+							_rotate = 0;
+							ctx.rotate(0 * Math.PI / 180);
+							ctx.translate(0, 0);
+						}
+
+						console.log('ori:' + _orientation + '  旋转:' + _rotate + 'imgW:' + img.width + 'imgH:' + img.height);
+						ctx.clearRect(0, 0, canvas.width, canvas.height); // canvas清屏
+
+						ctx.drawImage(img, 0, 0, img.width, img.height);
+						callback(canvas.toDataURL("image/jpeg",1));
+						//必须等压缩完才读取canvas值，否则canvas内容是黑帆布
+					};
+					// 记住必须先绑定事件，才能设置src属性，否则img没内容可以画到canvas
+					img.src = imgData;
+				}
+			}
+			compressImage("myFile");
+			
+			
+		</script>
+		<script type="text/javascript">
+			window.shareData = {    // 微信分享词
+			    "imgUrl" : "  ",
+			    "tLink": window.location.href,
+			    "tTitle" : "探寻鬼吹灯",
+			    "tContent" : " ",
+			    "commas" :" "
+			};
+		</script>
+		<script src="js/shareAndMTA.js" type="text/javascript" charset="utf-8"></script>
 	</body>
+
 </html>

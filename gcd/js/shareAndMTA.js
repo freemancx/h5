@@ -49,10 +49,22 @@ if(document.addEventListener){
 	document.attachEvent('onWeixinJSBridgeReady' , onBridgeReady);
 }
 
+
+var _mtac = {};
+(function() {
+	var mta = document.createElement("script");
+	mta.src = "https://pingjs.qq.com/h5/stats.js?v2.0.4";
+	mta.setAttribute("name", "MTAH5");
+	mta.setAttribute("sid", "500306978");
+
+	var s = document.getElementsByTagName("script")[0];
+	s.parentNode.insertBefore(mta, s);
+})();
+
 //newsShare
 var isQQnews = navigator.userAgent.match(/qqnews\/([\.\d ]+)/i);
 if( isQQnews ){
-    jQuery.getScript("http://mat1.gtimg.com/hn/chenxiang/js/news.js", function(data, status, jqxhr) {
+    jQuery.getScript("js/news.js", function(data, status, jqxhr) {
 		if (window.TencentNews && window.TencentNews.setGestureQuit) {
 			window.TencentNews.setGestureQuit(true);
 		}
@@ -62,14 +74,3 @@ if( isQQnews ){
         }
 	});
 }
-
-var _mtac = {};
-(function() {
-	var mta = document.createElement("script");
-	mta.src = "http://pingjs.qq.com/h5/stats.js?v2.0.4";
-	mta.setAttribute("name", "MTAH5");
-	mta.setAttribute("sid", "500306978");
-
-	var s = document.getElementsByTagName("script")[0];
-	s.parentNode.insertBefore(mta, s);
-})();

@@ -275,8 +275,11 @@ $(".zuobiao").click(function(){
 	}
 });
 
+var photoUrl = $("#link-photo").attr('href');
 $("#go-renzheng").click(function(){
 	if( $(this).hasClass('ready') ){
+		$("#link-photo").attr('href',photoUrl+'?score='+score*10);
+		//修改分数
 		$(".page-05").show().addClass('animated');
 	}else{
 		$("#mask-jz").show();

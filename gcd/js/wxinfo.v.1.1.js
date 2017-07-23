@@ -46,9 +46,9 @@ if(urlData == false) {
 	userData.headimgurl = getCookie('headimgurl');
 	userData.openID = getCookie('openID');
 } else {
-	userData.nickName = decodeURI(urlData.nickName);
-	userData.headimgurl = urlData.headimgurl;
-	userData.openID = urlData.openID;
+	userData.nickName = decodeURI(urlData.nickName) == "undefined" ? getCookie('nickName') : decodeURI(urlData.nickName);
+	userData.headimgurl = urlData.headimgurl == undefined ? getCookie('headimgurl') : urlData.headimgurl;
+	userData.openID = urlData.openID == undefined ? getCookie('openID') : urlData.openID;
 }
 console.log(userData.nickName);
 var pageUrl = window.location.href;
